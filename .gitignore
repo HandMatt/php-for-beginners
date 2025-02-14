@@ -1,0 +1,28 @@
+# Ignore the .sql file
+*.sql
+
+# Ignore the vendor directory (if using Composer)
+vendor/
+
+# Ignore environment files
+.env
+
+# Ignore log files
+*.log
+
+# Ignore cache files
+cache/
+*.cache
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore IDE specific files
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db 
