@@ -1,10 +1,12 @@
 <?php
 
+use Core\Response;
+
 function dd($value)
 {
-    echo '<pre>';
+    echo "<pre>";
     var_dump($value);
-    echo '</pre>';
+    echo "</pre>";
 
     die();
 }
@@ -29,5 +31,6 @@ function base_path($path)
 function view($path, $attributes = [])
 {
     extract($attributes);
+
     require base_path('views/' . $path);
 }
