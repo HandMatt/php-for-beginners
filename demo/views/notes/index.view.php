@@ -3,7 +3,7 @@
 <?php require base_path('views/partials/banner.php') ?>
 
 <main>
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <ul>
             <?php foreach ($notes as $note) : ?>
                 <li>
@@ -15,7 +15,7 @@
         </ul>
 
         <p class="mt-6">
-            <a href="/notes/create" class="text-blue-500 hover:underline">Add a new note</a>
+            <a href="/notes/create" class="text-blue-500 hover:underline">Create Note</a>
         </p>
     </div>
 </main>
