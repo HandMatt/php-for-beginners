@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * Footer Partial
  * Appears at bottom of every page
@@ -6,6 +7,7 @@
  */
 ?>
 
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>

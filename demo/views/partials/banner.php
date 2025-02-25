@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * Banner Partial
  * Appears below navigation, displays page heading

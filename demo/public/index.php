@@ -4,11 +4,15 @@
  * Application Entry Point
  * 
  * This file:
+ * - Starts the session
  * - Defines the base path constant
  * - Loads core functions and autoloader
  * - Initializes the router
  * - Handles incoming HTTP requests
  */
+
+// Start the session
+session_start();
 
 // Define base path for application
 const BASE_PATH = __DIR__ . '/../';
