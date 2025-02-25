@@ -5,6 +5,7 @@ This project follows the Laracasts "PHP for Beginners" course, implementing vari
 ## Prerequisites
 
 - PHP installed on your system
+- MySQL database server
 - Basic understanding of command line operations
 
 ## Getting Started
@@ -21,7 +22,11 @@ git clone https://github.com/HandMatt/php-for-beginners.git
 cd php-for-beginners/demo
 ```
 
-3. Serve the application:
+3. Configure your database:
+   - Create a new MySQL database
+   - Update database configuration in `config.php`
+
+4. Serve the application:
 
 ```bash
 php -S localhost:8888 -t public
@@ -29,7 +34,25 @@ php -S localhost:8888 -t public
 
 ## Project Structure
 
-[You can add details about your project structure here once you have more files and features]
+```
+demo/
+├── Core/                # Core framework classes
+├── controllers/         # Controller files
+│   └── notes/           # Note controller files
+├── public/              # Public assets
+└── views/               # View files
+    ├── notes/           # Note view files
+    └── partials/        # Partial view files
+```
+
+## Features
+
+- Simple MVC architecture
+- Database integration with PDO
+- Routing system
+- Basic CRUD operations
+- Form validation
+- Error handling
 
 ## Learning Resources
 

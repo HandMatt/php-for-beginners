@@ -1,3 +1,14 @@
+<?php 
+/**
+ * Head Partial
+ * Top of every page - contains:
+ * - DOCTYPE and opening HTML tags
+ * - Meta tags
+ * - Title
+ * - Tailwind CSS inclusion
+ */
+?>
+
 <!doctype html>
 <html lang="en" class="h-full bg-gray-100">
 

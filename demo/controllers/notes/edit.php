@@ -1,13 +1,12 @@
 <?php
 
 /**
- * Controller for handling note deletion
+ * Controller for displaying the note edit form
  * 
  * This controller:
- * - Retrieves the note by ID from the database
+ * - Retrieves the requested note from the database
  * - Verifies the current user owns the note
- * - Deletes the note if authorized
- * - Redirects back to notes index
+ * - Renders the edit form with the note data
  */
 
 use Core\App;
@@ -21,17 +20,15 @@ $currentUserId = 1;
 
 // Find the requested note or fail
 $note = $db->query('select * from notes where id = :id', [
-    'id' => $_POST['id']
+    'id' => $_GET['id']
 ])->findOrFail();
 
 // Verify user owns this note
 authorize($note['user_id'] === $currentUserId);
 
-// Delete the note
-$db->query('delete from notes where id = :id', [
-    'id' => $_POST['id']
+// Render edit form with note data
+view("notes/edit.view.php", [
+    'heading' => 'Edit Note',
+    'errors' => [],
+    'note' => $note
 ]);
-
-// Redirect back to notes index
-header('location: /notes');
-exit();

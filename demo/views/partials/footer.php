@@ -1,5 +1,11 @@
-</div>
+<?php 
+/**
+ * Footer Partial
+ * Appears at bottom of every page
+ * Closes main HTML tags opened in head.php
+ */
+?>
 
-</body>
-
+    </div>
+  </body>
 </html>
