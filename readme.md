@@ -37,22 +37,37 @@ php -S localhost:8888 -t public
 ```
 demo/
 ├── Core/                # Core framework classes
+|   └── Middleware/      # Middleware files
 ├── controllers/         # Controller files
-│   └── notes/           # Note controller files
+│   ├── notes/           # Note controller files
+|   └── registration/    # Registration controller files
 ├── public/              # Public assets
 └── views/               # View files
     ├── notes/           # Note view files
-    └── partials/        # Partial view files
+    ├── partials/        # Partial view files
+    └── registration/    # Registration view files
 ```
 
 ## Features
 
 - Simple MVC architecture
 - Database integration with PDO
-- Routing system
+- Routing system with support for:
+  - GET, POST, PATCH, PUT, DELETE methods
+  - Middleware protection
+  - Dynamic route parameters
+- Authentication system
+  - User registration
+  - Session management
+  - Protected routes
+- Middleware implementation
+  - Guest-only access control
+  - Authenticated user protection
 - Basic CRUD operations
 - Form validation
-- Error handling
+- Error handling with custom error pages
+- Clean separation of concerns
+- Organized project structure
 
 ## Learning Resources
 
