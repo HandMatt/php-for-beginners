@@ -7,6 +7,7 @@
  * - Static pages (home, about, contact)
  * - Note CRUD operations (create, read, update, delete)
  * - User registration
+ * - User authentication (login, logout)
  * 
  * Routes are grouped by resource/function and may include middleware
  * restrictions (auth, guest) where appropriate.
@@ -32,4 +33,9 @@ $router->post('/notes', 'controllers/notes/store.php');
 
 // Registration Routes
 $router->get('/register', 'controllers/registration/create.php')->only('guest');
-$router->post('/register', 'controllers/registration/store.php');
+$router->post('/register', 'controllers/registration/store.php')->only('guest');
+
+// Login Routes
+$router->get('/login', 'controllers/session/create.php')->only('guest');
+$router->post('/session', 'controllers/session/store.php')->only('guest');
+$router->delete('/session', 'controllers/session/destroy.php')->only('auth');

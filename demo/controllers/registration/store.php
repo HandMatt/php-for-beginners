@@ -21,7 +21,7 @@ $db = App::resolve(Database::class);
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-// Validate inputs
+// Validate email and password
 $errors = [];
 if (!Validator::email($email)) {
     $errors['email'] = 'Please provide a valid email address';
@@ -38,30 +38,25 @@ if (! empty($errors)) {
     ]);
 }
 
-// Check if user already exists
+// Check for existing user account
 $db = App::resolve(Database::class);
 $user = $db->query('SELECT * FROM users WHERE email = :email', [
     'email' => $email
 ])->find();
 
 if ($user) {
-    // Redirect if user exists
+    // User already exists - redirect to home
     header('location: /');
     exit();
 } else {
-    // Create new user
-    // TODO: Hash password before storage for security (use password_hash())
+    // Create new user with securely hashed password
     $db->query('INSERT INTO users (email, password) VALUES (:email, :password)', [
         'email' => $email,
-        'password' => $password
+        'password' => password_hash($password, PASSWORD_BCRYPT)
     ]);
 
-    // Start user session
-    $_SESSION['user'] = [
-        'email' => $email
-    ];
+    login($user);
 
-    // Redirect to home
     header('location: /');
     exit();
 }
