@@ -7,7 +7,8 @@
  * Route access is restricted to authenticated users only via middleware.
  */
 
-logout();
+use Core\Authenticator;
 
-header('location: /');
-exit();
+(new Authenticator)->logout();
+
+redirect('/');

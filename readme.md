@@ -36,16 +36,20 @@ php -S localhost:8888 -t public
 
 ```
 demo/
-├── Core/                # Core framework classes
-|   └── Middleware/      # Middleware files
-├── controllers/         # Controller files
-│   ├── notes/           # Note controller files
-|   └── registration/    # Registration controller files
-├── public/              # Public assets
-└── views/               # View files
-    ├── notes/           # Note view files
-    ├── partials/        # Partial view files
-    └── registration/    # Registration view files
+├── Core/                   # Core framework classes
+|   └── Middleware/         # Middleware files
+├── Http/                   # HTTP-related components
+│   ├── controllers/        # Controller files
+│   │   ├── notes/          # Note controller files
+│   │   ├── registration/   # Registration controller files
+│   │   └── session/        # Session controller files
+│   └── Forms/              # Form handling and validation classes
+├── public/                 # Public assets
+└── views/                  # View files
+    ├── notes/              # Note view files
+    ├── partials/           # Partial view files
+    ├── registration/       # Registration view files
+    └── session/            # Session view files
 ```
 
 ## Features
@@ -58,6 +62,7 @@ demo/
   - Dynamic route parameters
 - Authentication system
   - User registration
+  - User login and logout
   - Session management
   - Protected routes
 - Middleware implementation

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Registration Form Controller

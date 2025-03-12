@@ -82,33 +82,12 @@ function view($path, $attributes = [])
 }
 
 /**
- * Start authenticated session for user
+ * Redirect to a specific path
  * 
- * Creates a new session for the authenticated user and
- * regenerates the session ID for security.
- * 
- * @param array $user User data containing email
+ * @param string $path Path to redirect to
  */
-function login($user)
+function redirect($path)
 {
-    $_SESSION['user'] = [
-        'email' => $user['email']
-    ];
-
-    session_regenerate_id(true);
-}
-
-/**
- * End user session and cleanup
- * 
- * Destroys the current session and removes the session cookie
- * for complete logout security.
- */
-function logout()
-{
-    $_SESSION = [];
-    session_destroy();
-
-    $params = session_get_cookie_params();
-    setcookie('PHPSESSID', '', time() - 3600, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+    header("location: {$path}");
+    exit();
 }
