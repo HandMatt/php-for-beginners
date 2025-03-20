@@ -11,6 +11,8 @@
  * - Handles incoming HTTP requests
  */
 
+use Core\Session;
+
 // Start the session
 session_start();
 
@@ -42,3 +44,5 @@ $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
 // Route the request
 $router->route($uri, $method);
+
+Session::unflash();

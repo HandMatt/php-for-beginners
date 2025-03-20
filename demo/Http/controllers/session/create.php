@@ -7,4 +7,8 @@
  * Route access is restricted to guest users only via middleware.
  */
 
-view('session/create.view.php');
+ use Core\Session;
+
+ view('session/create.view.php', [
+     'errors' => Session::get('errors')
+ ]);
