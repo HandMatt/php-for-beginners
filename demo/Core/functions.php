@@ -91,3 +91,15 @@ function redirect($path)
     header("location: {$path}");
     exit();
 }
+
+/**
+ * Get old input value
+ * 
+ * @param string $key Key to get value for
+ * @param string $default Default value if key not found
+ * @return string Old input value
+ */
+function old($key, $default = '')
+{
+    return Core\Session::get('old')[$key] ?? $default;
+}

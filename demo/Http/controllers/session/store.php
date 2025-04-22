@@ -12,6 +12,7 @@
  */
 
 use Core\Authenticator;
+use Core\Session;
 use Http\Forms\LoginForm;
 
 // Get form inputs
@@ -30,6 +31,9 @@ if ($form->validate($email, $password)) {
 }
 
 // Authentication failed - return to login form
-return view('session/create.view.php', [
-    'errors' => $form->errors()
+Session::flash('errors', $form->errors());
+Session::flash('old', [
+    'email' => $_POST['email']
 ]);
+
+return redirect('/login');
