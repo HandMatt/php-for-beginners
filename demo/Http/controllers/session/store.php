@@ -3,37 +3,36 @@
 /**
  * Login Authentication Controller
  * 
- * This controller:
- * - Validates login credentials (email and password)
- * - Returns to form with errors if validation fails
- * - Verifies user exists and password matches
- * - Starts user session on successful authentication
- * - Redirects to home page after login
+ * Handles user authentication process:
+ * 1. Validates login form submission using LoginForm validator
+ * 2. Attempts user authentication with provided credentials
+ * 3. Manages authentication failures with appropriate error messages
+ * 4. Redirects to home page on successful login
+ * 
+ * @uses Core\Authenticator
+ * @uses Http\Forms\LoginForm
  */
 
 use Core\Authenticator;
-use Core\Session;
 use Http\Forms\LoginForm;
 
-// Get form inputs
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-$form = new LoginForm();
-
-// Validate input format
-if ($form->validate($email, $password)) {
-    if ((new Authenticator)->attempt($email, $password)) {
-        redirect('/');
-    }
-
-    $form->error('email', 'No matching account found for that email address and password.');
-}
-
-// Authentication failed - return to login form
-Session::flash('errors', $form->errors());
-Session::flash('old', [
-    'email' => $_POST['email']
+// Validate form input using dedicated form validator
+$form = LoginForm::validate($attributes = [
+    'email' => $_POST['email'],
+    'password' => $_POST['password']
 ]);
 
-return redirect('/login');
+// Attempt user authentication with validated credentials
+$signedIn = (new Authenticator)->attempt(
+    $attributes['email'], $attributes['password']
+);
+
+// If authentication fails, throw validation exception with error message
+if (!$signedIn) {
+    $form->error(
+        'email', 'No matching account found for that email address and password.'
+    )->throw();
+}
+
+// Redirect to home page on successful authentication
+redirect('/');

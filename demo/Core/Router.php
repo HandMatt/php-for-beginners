@@ -7,16 +7,24 @@ use Core\Middleware\Middleware;
 /**
  * HTTP Router
  * 
- * Handles routing functionality:
- * - Registers routes for different HTTP methods
- * - Matches incoming requests to registered routes
- * - Loads appropriate controllers
+ * Handles routing functionality for the application by:
+ * - Registering routes for different HTTP methods (GET, POST, PUT, PATCH, DELETE)
+ * - Matching incoming requests to registered routes
+ * - Loading appropriate controllers
+ * - Managing middleware for route protection
+ * 
+ * @package Core
  */
 class Router
 {
     /**
-     * Registered routes
-     * @var array
+     * Array of registered routes with their configurations
+     * 
+     * @var array[] Array of route configurations containing:
+     *              - uri: string The route URI
+     *              - controller: string The controller path
+     *              - method: string The HTTP method
+     *              - middleware: ?string The middleware key if any
      */
     protected $routes = [];
 
@@ -100,10 +108,10 @@ class Router
     }
 
     /**
-     * Apply middleware to the last registered route
+     * Apply middleware protection to the most recently registered route
      * 
-     * @param string $key The middleware key to apply
-     * @return $this
+     * @param string $key The middleware key to apply (e.g., 'guest', 'auth')
+     * @return $this For method chaining
      */
     public function only($key)
     {
@@ -113,11 +121,12 @@ class Router
     }
 
     /**
-     * Route the request to appropriate controller
+     * Route the request to appropriate controller based on URI and method
      * 
-     * @param string $uri Request URI
-     * @param string $method HTTP method
+     * @param string $uri Request URI to match
+     * @param string $method HTTP method of the request
      * @return mixed Controller response
+     * @throws \Exception When route not found (via abort())
      */
     public function route($uri, $method)
     {
@@ -130,6 +139,16 @@ class Router
         }
 
         $this->abort();
+    }
+
+    /**
+     * Get the previous URL from the request headers
+     * 
+     * @return string Previous URL from HTTP_REFERER
+     */
+    public function previousUrl()
+    {
+        return $_SERVER['HTTP_REFERER'];
     }
 
     /**

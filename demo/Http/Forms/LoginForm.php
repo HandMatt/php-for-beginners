@@ -3,37 +3,67 @@
 namespace Http\Forms;
 
 use Core\Validator;
+use Core\ValidationException;
 
 /**
- * Handles the validation of login form submissions
+ * Login Form Validator
+ * 
+ * Handles validation of login form submissions including:
+ * - Email format validation
+ * - Password requirements checking
+ * - Error collection and management
+ * - Exception throwing for invalid submissions
+ * 
+ * @package Http\Forms
  */
 class LoginForm
 {
     /**
-     * Array to store validation error messages
-     * @var array
+     * Collection of validation error messages
+     * 
+     * @var array<string, string> Array of field => message pairs
      */
     protected $errors = [];
 
     /**
-     * Validates the login form input
+     * Create new login form validator instance
      * 
-     * @param string $email The user's email address
-     * @param string $password The user's password
-     * @return bool True if validation passes, false otherwise
+     * @param array $attributes Form input data to validate
      */
-    public function validate($email, $password)
+    public function __construct(public array $attributes)
     {
         // Validate input format
-        if (!Validator::email($email)) {
+        if (!Validator::email($attributes['email'])) {
             $this->errors['email'] = 'Please provide a valid email address.';
         }
 
-        if (!Validator::string($password)) {
+        if (!Validator::string($attributes['password'], 100)) {
             $this->errors['password'] = 'Please provide a valid password.';
         }
+    }
 
-        return empty($this->errors);
+    /**
+     * Static factory method to create and validate a login form
+     * 
+     * @param array $attributes Form input data
+     * @return self Returns validator instance if valid
+     * @throws ValidationException If validation fails
+     */
+    public static function validate($attributes)
+    {
+        $instance = new static($attributes);
+
+        return $instance->failed() ? $instance->throw() : $instance;
+    }
+
+    public function throw()
+    {
+        ValidationException::throw($this->errors(), $this->attributes);
+    }
+
+    public function failed()
+    {
+        return count($this->errors);
     }
 
     /**
@@ -55,5 +85,7 @@ class LoginForm
     public function error($field, $message)
     {
         $this->errors[$field] = $message;
+
+        return $this;
     }
 }
