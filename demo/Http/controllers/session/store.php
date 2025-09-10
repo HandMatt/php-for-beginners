@@ -24,13 +24,15 @@ $form = LoginForm::validate($attributes = [
 
 // Attempt user authentication with validated credentials
 $signedIn = (new Authenticator)->attempt(
-    $attributes['email'], $attributes['password']
+    $attributes['email'],
+    $attributes['password']
 );
 
 // If authentication fails, throw validation exception with error message
 if (!$signedIn) {
     $form->error(
-        'email', 'No matching account found for that email address and password.'
+        'email',
+        'No matching account found for that email address and password.'
     )->throw();
 }
 

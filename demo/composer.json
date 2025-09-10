@@ -1,0 +1,17 @@
+{
+    "name": "php-for-beginners/demo",
+    "authors": [
+        {
+            "name": "Matt Hand",
+            "email": "matthew.hand124@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "Http\\": "Http/",
+            "Views\\": "Views/"
+        }
+    }
+}

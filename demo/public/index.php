@@ -18,21 +18,17 @@
 use Core\Session;
 use Core\ValidationException;
 
-// Start the session
-session_start();
-
 // Define base path for application
 const BASE_PATH = __DIR__ . '/../';
 
+// Register class autoloader
+require BASE_PATH . 'vendor/autoload.php';
+
+// Start the session
+session_start();
+
 // Load core functions
 require BASE_PATH . 'Core/functions.php';
-
-// Register class autoloader
-spl_autoload_register(function ($class) {
-    // Convert namespace separators to directory separators
-    $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-    require base_path("{$class}.php");
-});
 
 // Initialize application
 require base_path('bootstrap.php');
