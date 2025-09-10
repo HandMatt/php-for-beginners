@@ -31,8 +31,13 @@ class Validator
      * @param string $value Email to validate
      * @return bool
      */
-    public static function email($value)
+    public static function email(string $value): bool
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL);
+    }
+
+    public static function greaterThan(int $value, int $greaterThan): bool
+    {
+        return $value > $greaterThan;
     }
 }

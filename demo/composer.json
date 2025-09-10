@@ -6,12 +6,23 @@
             "email": "matthew.hand124@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "illuminate/collections": "^12.28"
+    },
     "autoload": {
         "psr-4": {
             "Core\\": "Core/",
             "Http\\": "Http/",
-            "Views\\": "Views/"
+            "Views\\": "Views/",
+            "Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^4.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }
